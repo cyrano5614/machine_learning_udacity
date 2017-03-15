@@ -45,7 +45,7 @@ class LearningAgent(Agent):
         if testing == False:
             self.t += 1
             # self.a = 0.02
-            self.a = 0.02
+            self.a = 0.005
 
             # self.a = 0.01
             # self.epsilon -= 0.05
@@ -81,7 +81,10 @@ class LearningAgent(Agent):
         ###########
         # Set 'state' as a tuple of relevant data for the agent
         # state = (waypoint, inputs['light'], inputs['oncoming'], inputs['right'], inputs['left'])#, deadline)
-        state = (waypoint, inputs['light'], inputs['oncoming'])
+        # state = (waypoint, inputs['light'], inputs['oncoming'])
+
+        # Added inputs['left'] back to code to make agent judge when to turn right on red
+        state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'])
 
         print "Built state: {}".format(state)
 
@@ -192,8 +195,8 @@ class LearningAgent(Agent):
             state, choose an action, receive a reward, and learn if enabled. """
         print "Alpha: {}".format(self.alpha)
         print "Epsilon: {}".format(self.epsilon)
-        self.possible_states = 24
-        print "Number of possible states: {}".format(24)
+        self.possible_states = 96
+        print "Number of possible states: {}".format(self.possible_states)
 
         state = self.build_state()          # Get current state
 
